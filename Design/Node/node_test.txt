@@ -1,0 +1,76 @@
+Intializing 2 classes: test1 and test2
+2015-12-27 00:37:40,884 - DEBUG - Node::Constructor Initialized
+2015-12-27 00:37:40,884 - DEBUG - ('Node::Constructor::Name: ', 'foo')
+2015-12-27 00:37:40,884 - DEBUG - ('Node::Constructor::Value: ', 123)
+2015-12-27 00:37:40,884 - DEBUG - ('Node::Constructor::Prev: ', None)
+2015-12-27 00:37:40,885 - DEBUG - ('Node::Constructor::Next: ', None)
+Return Test1
+2015-12-27 00:37:40,885 - DEBUG - Node::Consturctor Finalized
+2015-12-27 00:37:40,885 - DEBUG - ('Node::Return::Name: ', 'foo')
+foo
+123
+2015-12-27 00:37:40,885 - DEBUG - ('Node::Return::Value: ', 123)
+2015-12-27 00:37:40,885 - DEBUG - ('Node::Return::Prev: ', None)
+2015-12-27 00:37:40,885 - DEBUG - ('Node::Return::Next: ', None)
+None
+2015-12-27 00:37:40,885 - DEBUG - Node::Constructor Initialized
+None
+2015-12-27 00:37:40,885 - DEBUG - ('Node::Constructor::Name: ', 'foo2')
+2015-12-27 00:37:40,885 - DEBUG - ('Node::Constructor::Value: ', 456)
+2015-12-27 00:37:40,885 - DEBUG - ('Node::Constructor::Prev: ', <node.Node object at 0x101074940>)
+2015-12-27 00:37:40,885 - DEBUG - ('Node::Constructor::Next: ', <node.Node object at 0x101074940>)
+2015-12-27 00:37:40,885 - DEBUG - Node::Consturctor Finalized
+Return Test2
+foo2
+2015-12-27 00:37:40,885 - DEBUG - ('Node::Return::Name: ', 'foo2')
+2015-12-27 00:37:40,885 - DEBUG - ('Node::Return::Value: ', 456)
+2015-12-27 00:37:40,885 - DEBUG - ('Node::Return::Prev: ', <node.Node object at 0x101074940>)
+456
+<node.Node object at 0x101074940>
+<node.Node object at 0x101074940>
+Testing setAll()
+2015-12-27 00:37:40,885 - DEBUG - ('Node::Return::Next: ', <node.Node object at 0x101074940>)
+2015-12-27 00:37:40,885 - DEBUG - Node::Set::All Initialized
+2015-12-27 00:37:40,885 - DEBUG - Node::Set::Name Initialized
+2015-12-27 00:37:40,885 - DEBUG - ('Node::Set::Name Current: ', 'foo')
+2015-12-27 00:37:40,885 - DEBUG - ('Node::Set::Name Target : ', 'foo_changed')
+2015-12-27 00:37:40,885 - DEBUG - ('Node::Set::Name Changed: ', 'foo_changed')
+2015-12-27 00:37:40,886 - DEBUG - Node::Set::Name Finished
+2015-12-27 00:37:40,886 - DEBUG - Node::Set::Value Initialized
+2015-12-27 00:37:40,886 - DEBUG - ('Node::Set::Value Current: ', 123)
+2015-12-27 00:37:40,886 - DEBUG - ('Node::Set::Value Target : ', 789)
+2015-12-27 00:37:40,886 - DEBUG - ('Node::Set::Value Changed: ', 789)
+2015-12-27 00:37:40,886 - DEBUG - Node::Set::Value Finished
+2015-12-27 00:37:40,886 - DEBUG - Node::Set::Prev Initialized
+2015-12-27 00:37:40,886 - DEBUG - ('Node::Set::Prev Current: ', None)
+2015-12-27 00:37:40,886 - DEBUG - ('Node::Set::Prev Target:  ', <node.Node object at 0x101074978>)
+2015-12-27 00:37:40,886 - DEBUG - ('Node::Set::Prev Changed: ', <node.Node object at 0x101074978>)
+2015-12-27 00:37:40,886 - DEBUG - Node::Set Prev Finished
+2015-12-27 00:37:40,886 - DEBUG - Node::Set::Next Initialized
+2015-12-27 00:37:40,886 - DEBUG - ('Node::Set::Next Current: ', None)
+2015-12-27 00:37:40,886 - DEBUG - ('Node::Set::Next Target : ', <node.Node object at 0x101074978>)
+2015-12-27 00:37:40,886 - DEBUG - ('Node::Set::Next Changed: ', <node.Node object at 0x101074978>)
+2015-12-27 00:37:40,886 - DEBUG - Node::Set::Next Finished
+2015-12-27 00:37:40,886 - DEBUG - Node::Set::All Finished
+2015-12-27 00:37:40,886 - DEBUG - ('Node::Return::Name: ', 'foo_changed')
+foo_changed
+2015-12-27 00:37:40,886 - DEBUG - ('Node::Return::Value: ', 789)
+789
+2015-12-27 00:37:40,886 - DEBUG - ('Node::Return::Prev: ', <node.Node object at 0x101074978>)
+<node.Node object at 0x101074978>
+2015-12-27 00:37:40,886 - DEBUG - ('Node::Return::Next: ', <node.Node object at 0x101074978>)
+<node.Node object at 0x101074978>
+Testing Access of Pointer Previous and Next
+2015-12-27 00:37:40,886 - DEBUG - ('Node::Return::Prev: ', <node.Node object at 0x101074978>)
+2015-12-27 00:37:40,886 - DEBUG - ('Node::Return::Name: ', 'foo2')
+With Prev, Name:  foo2
+2015-12-27 00:37:40,886 - DEBUG - ('Node::Return::Next: ', <node.Node object at 0x101074978>)
+2015-12-27 00:37:40,887 - DEBUG - ('Node::Return::Name: ', 'foo2')
+With Next, Name:  foo2
+2015-12-27 00:37:40,887 - DEBUG - ('Node::Return::Prev: ', <node.Node object at 0x101074978>)
+2015-12-27 00:37:40,887 - DEBUG - ('Node::Return::Next: ', <node.Node object at 0x101074978>)
+2015-12-27 00:37:40,887 - DEBUG - ('Node::Return::Name: ', 'foo2')
+With test2_foop::Name:  foo2
+2015-12-27 00:37:40,887 - DEBUG - ('Node::Return::Name: ', 'foo2')
+With test2_foo::Name :  foo2
+[Finished in 0.1s]
