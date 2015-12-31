@@ -22,7 +22,7 @@ Constructor Argument:
 example= Node(name_of_node, value_of_node, prev_node, next_node)
 ```
 
-## Set Variables
+## Setting Variables
 Setting Individual Variable:
 ```python
 setName_of_Variable(desired_variable)
@@ -35,9 +35,9 @@ setAll(desired_Name, desired_Value, desired_Prev, desired_Next)
 ```
 e.g.: `example.setAll('foo', 1234, example2, example3)`
 
-## Return Variables
+## Returning Variables
 Methods:
 ```Python
-returnName_of_Variable
+returnName_of_Variable()
 ```
 e.g. `name = example.returnName()`
