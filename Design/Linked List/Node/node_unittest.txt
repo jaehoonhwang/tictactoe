@@ -1,0 +1,9 @@
+testReturn (__main__.TestNode) ... ok
+testSet (__main__.TestNode) ... ok
+testSetAll (__main__.TestNode) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.003s
+
+OK
+[Finished in 0.1s]
