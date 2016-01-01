@@ -43,3 +43,21 @@ class LinkedList(object):
 		self.Tail = tail
 		logging.debug(('LinkedList::Set::Tail Changed: ', self.Tail))
 		logging.debug('LinkedList::Set::Tail Finished')
+
+	## Exchange Node
+	def exchangeNode(self, node1, node2):
+		logging.debug('LinkedList::Exchange::Node Initialized')
+		name = node1.returnName()
+		value = node1.returnValue()
+		p = node1.returnPrev()
+		n = node1.returnNext()
+		
+		logging.debug('LinkedList::Exchange::Node, First one')
+		node1.setAll(node2.returnName(), node2.returnValue(), 
+			node2.returnPrev(), node2.returnNext())
+
+		logging.debug('LinkedList::Exchange::Node, Second one')
+		node2.setAll(name, value, p, n)
+		logging.debug('LinkedList::Exchange::Node Finished')
+
+	## 
