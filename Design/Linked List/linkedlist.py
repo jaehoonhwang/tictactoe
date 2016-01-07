@@ -77,7 +77,7 @@ class LinkedList(object):
 
     # Push as Stack
     def pushS(self, node):
-   		logging.debug('LinkedList::PushStack Initialized')
+        logging.debug('LinkedList::PushStack Initialized')
         if(self.Head is None):
             logging.debug('LinkedList::PushStack::No Head')
             self.Head = node
@@ -95,17 +95,17 @@ class LinkedList(object):
 
     # Pop as Stack
     def popS(self):
-    	logging.debug('LinkedList::PopStack Initialized')
+        logging.debug('LinkedList::PopStack Initialized')
         if(self.Head is None):
             logging.debug('LinkedList::PopStack::Warning - There is nothing to pop')
             logging.debug('LinkedList::PopStack::Finished')
         elif (self.Head is self.Tail):
-        	logging.debug('LinkedList::PopStack::Head is Tail')
-        	self.Tail.clear()
-        	self.Head = None
-        	self.Tail = None
-        	self.Size = self.Size -1 
-        	logging.debug('LinkedList::PopStack::Finished')
+            logging.debug('LinkedList::PopStack::Head is Tail')
+            self.Tail.clear()
+            self.Head = None
+            self.Tail = None
+            self.Size = self.Size -1 
+            logging.debug('LinkedList::PopStack::Finished')
         else:
             logging.debug('LinkedList::PopStack::Tail: ', self.Tail)
             tail = self.Tail.returnPrev()
@@ -117,50 +117,50 @@ class LinkedList(object):
 
     # Search Custom Function   
 
-    ## Search by Index
+    # Search by Index
     def searchIndex(self, index):
-    	logging.debug('LinkedList::searchIndex Initialized')
-    	if(index > self.Size):
-    		logging.debug('LinkedList::searchIndex Requested Index is greater than Size')
-    	else:
-    		logging.debug('LinkedList::searchIndex Initialized')
-    		head = self.Head
-    		for i in range(0, index-1):
-    			head = head.returnNext()
-			logging.debug('LinkedList::searchIndex Finished')
-    		return head
+        logging.debug('LinkedList::searchIndex Initialized')
+        if(index > self.Size):
+            logging.debug('LinkedList::searchIndex Requested Index is greater than Size')
+        else:
+            logging.debug('LinkedList::searchIndex Initialized')
+            head = self.Head
+            for i in range(0, index):
+                head = head.returnNext()
+            logging.debug('LinkedList::searchIndex Finished')
+            return head
 
-    ## Search by Value
+    # Search by Value
     def searchValue(self, value):
-    	logging.debug('LinkedList::searchValue Intiailized')
-    	holder_node = self.Head
-    	holder = None
-    	while(holder_node.returnNext() is not None):
-    		if holder_node.returnValue() is value:
-    			holder = holder_node
-    			break
-    		else:
-    			holder_node = holder_node.returnNext()
-    	if(holder is None):
-    		logging.debug(('LinkedList::searchValue::Search Failed, Particular Value has not been found: ', value))
-    		return
-    	else:
-    		logging.debug(('LinkedList::searchValue::Search Succeded::Returning: ', holder))
-    		return holder
+        logging.debug('LinkedList::searchValue Intiailized')
+        holder_node = self.Head
+        holder = None
+        while(holder_node.returnNext() is not None):
+            if holder_node.returnValue() is value:
+                holder = holder_node
+                break
+            else:
+                holder_node = holder_node.returnNext()
+        if(holder is None):
+            logging.debug(('LinkedList::searchValue::Search Failed, Particular Value has not been found: ', value))
+            return
+        else:
+            logging.debug(('LinkedList::searchValue::Search Succeded::Returning: ', holder))
+            return holder
 
     def searchName(self, name):
-    	logging.debug('LinkedList::searchName Intiailized')
-    	holder_node = self.Head
-    	holder = None
-    	while(holder_node.returnNext() is not None):
-    		if holder_node.returnName() is name:
-    			holder = holder_node
-    			break
-    		else:
-    			holder_node = holder_node.returnNext()
-    	if(holder is None):
-    		logging.debug(('LinkedList::searchName::Search Failed, Particular Name has not been found: ', name))
-    		return
-    	else:
-    		logging.debug(('LinkedList::searchName::Search Succeded::Returning: ', holder))
-    		return holder
+        logging.debug('LinkedList::searchName Intiailized')
+        holder_node = self.Head
+        holder = None
+        while(holder_node.returnNext() is not None):
+            if holder_node.returnName() is name:
+                holder = holder_node
+                break
+            else:
+                holder_node = holder_node.returnNext()
+        if(holder is None):
+            logging.debug(('LinkedList::searchName::Search Failed, Particular Name has not been found: ', name))
+            return
+        else:
+            logging.debug(('LinkedList::searchName::Search Succeded::Returning: ', holder))
+            return holder
