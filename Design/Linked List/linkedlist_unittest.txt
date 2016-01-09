@@ -1,0 +1,10 @@
+testExchange (__main__.TestLinkedList) ... ok
+testPop (__main__.TestLinkedList) ... ok
+testPush (__main__.TestLinkedList) ... ok
+testReturn (__main__.TestLinkedList) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.005s
+
+OK
+[Finished in 0.1s]

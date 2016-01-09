@@ -72,6 +72,10 @@ class LinkedList(object):
 
         logging.debug('LinkedList::Exchange::Node2::Exhcnage with Node1')
         node2.setAll(name, value, n, p)
+        if(self.Head is node1):
+            self.Head = node2
+        if(self.Tail is node2):
+            self.Tail = node1
 
     # Stack Properties: Push and Pop
 
@@ -82,14 +86,17 @@ class LinkedList(object):
             logging.debug('LinkedList::PushStack::No Head')
             self.Head = node
             self.Tail = node
+            logging.debug(('LinkedList::PushStack::Head: ', self.Head))
+            logging.debug(('LinkedList::PushStack::Tail: ', self.Tail))
             self.Size = self.Size + 1
+            logging.debug(('LinkedList::PushStack::Size: ', self.Size))
             logging.debug('LinkedList::PushStack Finished')
         else:
             logging.debug('LinkedList::PushStack::Head Exists')
             target_prev = self.Tail
-            self.Tail = node
             target_prev.setNext(node)
-            target.setPrev(target_prev)
+            node.setPrev(target_prev)
+            self.Tail = node
             self.Size = self.Size + 1
             logging.debug('LinkedList::PushStack Finished')
 
@@ -107,7 +114,7 @@ class LinkedList(object):
             self.Size = self.Size -1 
             logging.debug('LinkedList::PopStack::Finished')
         else:
-            logging.debug('LinkedList::PopStack::Tail: ', self.Tail)
+            logging.debug(('LinkedList::PopStack::Tail: ', self.Tail))
             tail = self.Tail.returnPrev()
             tail.setNext(None)
             self.Tail.clear()
