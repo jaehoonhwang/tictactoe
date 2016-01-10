@@ -124,50 +124,63 @@ class LinkedList(object):
 
     # Search Custom Function   
 
-    # Search by Index
+    ## Search by Index
     def searchIndex(self, index):
         logging.debug('LinkedList::searchIndex Initialized')
         if(index > self.Size):
             logging.debug('LinkedList::searchIndex Requested Index is greater than Size')
+            return None
         else:
             logging.debug('LinkedList::searchIndex Initialized')
-            head = self.Head
+            target = self.Head
             for i in range(0, index):
-                head = head.returnNext()
+                target = target.returnNext()
             logging.debug('LinkedList::searchIndex Finished')
-            return head
+            return target
 
-    # Search by Value
+    ## Search by Value
     def searchValue(self, value):
         logging.debug('LinkedList::searchValue Intiailized')
         holder_node = self.Head
         holder = None
-        while(holder_node.returnNext() is not None):
-            if holder_node.returnValue() is value:
+
+        while(holder_node is not None):
+            if (holder_node.returnValue() == value):
+                logging.debug(('LinkedList::searchValue::Value Found: ', holder_node))
                 holder = holder_node
                 break
             else:
                 holder_node = holder_node.returnNext()
+                logging.debug(('LinkedList::searchValue::Shifting: ', holder_node))
+
+        logging.debug(('LinkedList::searchValue::Holder: ', holder))
+
         if(holder is None):
             logging.debug(('LinkedList::searchValue::Search Failed, Particular Value has not been found: ', value))
-            return
+            return None
         else:
             logging.debug(('LinkedList::searchValue::Search Succeded::Returning: ', holder))
             return holder
 
+    ## Search by Name
     def searchName(self, name):
         logging.debug('LinkedList::searchName Intiailized')
         holder_node = self.Head
         holder = None
-        while(holder_node.returnNext() is not None):
-            if holder_node.returnName() is name:
+
+        while(holder_node is not None):
+            if (holder_node.returnName() == name):
+                logging.debug(('LinkedList::searchName::Name Found: ', holder_node))
                 holder = holder_node
                 break
             else:
                 holder_node = holder_node.returnNext()
+
+        logging.debug(('LinkedList::searchName::Holder: ', holder))
+
         if(holder is None):
             logging.debug(('LinkedList::searchName::Search Failed, Particular Name has not been found: ', name))
-            return
+            return None
         else:
             logging.debug(('LinkedList::searchName::Search Succeded::Returning: ', holder))
             return holder

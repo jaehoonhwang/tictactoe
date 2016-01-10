@@ -2,9 +2,12 @@ testExchange (__main__.TestLinkedList) ... ok
 testPop (__main__.TestLinkedList) ... ok
 testPush (__main__.TestLinkedList) ... ok
 testReturn (__main__.TestLinkedList) ... ok
+testSearchIndex (__main__.TestLinkedList) ... ok
+testSearchName (__main__.TestLinkedList) ... ok
+testSearchValue (__main__.TestLinkedList) ... ok
 
 ----------------------------------------------------------------------
-Ran 4 tests in 0.005s
+Ran 7 tests in 0.009s
 
 OK
 [Finished in 0.1s]

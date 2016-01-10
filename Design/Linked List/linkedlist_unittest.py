@@ -12,7 +12,7 @@ class TestLinkedList(unittest.TestCase):
     def setUp(self):
         self.LinkedL = LinkedList()
         self.test1 = Node('test1', 123)
-        self.test2 = Node('test2', 345)
+        self.test2 = Node('test2', 456)
         self.test3 = Node('test3', 789)
 
     def testReturn(self):
@@ -80,10 +80,60 @@ class TestLinkedList(unittest.TestCase):
         self.assertEqual(self.LinkedL.returnTail(), self.test3)
         self.assertEqual(self.LinkedL.returnSize(), 3)
 
-        self.LinkedL.exchangeNode(self.LinkedL.Head, self.LinkedL.Tail)
+        self.LinkedL.exchangeNode(self.LinkedL.returnHead(), self.LinkedL.returnTail())
         self.assertEqual(self.LinkedL.returnHead(), self.test3)
         self.assertEqual(self.LinkedL.returnTail(), self.test1)
 
+    def testSearchIndex(self):
+        self.LinkedL.pushS(self.test1)
+        self.LinkedL.pushS(self.test2)
+        self.LinkedL.pushS(self.test3)
+
+        index = self.LinkedL.searchIndex(0)
+        self.assertEqual(index, self.test1)
+
+        index2 = self.LinkedL.searchIndex(1)
+        self.assertEqual(index2, self.test2)
+
+        index3 = self.LinkedL.searchIndex(2)
+        self.assertEqual(index3, self.test3)
+
+        ind = self.LinkedL.searchIndex(3)
+        self.assertEqual(ind, None)
+
+    def testSearchValue(self):
+        self.LinkedL.pushS(self.test1)
+        self.LinkedL.pushS(self.test2)
+        self.LinkedL.pushS(self.test3)
+
+        val1 = self.LinkedL.searchValue(123)
+        self.assertEqual(val1, self.test1)
+
+        val2 = self.LinkedL.searchValue(456)
+        self.assertEqual(val2, self.test2)
+
+        val3 = self.LinkedL.searchValue(789)
+        self.assertEqual(val3, self.test3) 
+
+        val4 = self.LinkedL.searchValue(0)
+        self.assertEqual(val4, None)
+
+    def testSearchName(self):
+        self.LinkedL.pushS(self.test1)
+        self.LinkedL.pushS(self.test2)
+        self.LinkedL.pushS(self.test3)
+
+        nam1 = self.LinkedL.searchName('test1')
+        self.assertEqual(nam1, self.test1)
+
+        nam2 = self.LinkedL.searchName('test2')
+        self.assertEqual(nam2, self.test2)
+
+        nam3 = self.LinkedL.searchName('test3')
+        self.assertEqual(nam3, self.test3)
+
+        nam4 = self.LinkedL.searchName('test')
+        self.assertEqual(nam4, None)
 
 if __name__ == '__main__':
     unittest.main(verbosity=2)
