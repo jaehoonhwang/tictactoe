@@ -1,11 +1,20 @@
+# Importing official modules
+import os
+import sys
 import logging
 import unittest
+
+# Directories of Node
+dir = os.path.dirname(__file__)
+dir = dir + '/Node'
+sys.path.insert(1, dir)
+
+# Importing custom modules
 from linkedlist import LinkedList
-from Node.node import Node
+from node import Node
 
 root_logger = logging.getLogger()
 root_logger.disabled = True
-
 
 class TestLinkedList(unittest.TestCase):
 
@@ -35,7 +44,7 @@ class TestLinkedList(unittest.TestCase):
         self.assertEqual(self.LinkedL.returnTail(), self.test3)
         self.assertEqual(self.LinkedL.returnSize(), 3)
 
-        head = self.LinkedL.Head
+        head = self.LinkedL.returnHead()
         test1 = head
         test2 = test1.returnNext()
         test3 = test2.returnNext()
@@ -43,7 +52,7 @@ class TestLinkedList(unittest.TestCase):
         self.assertEqual(test2, self.test2)
         self.assertEqual(test3, self.test3)
 
-        tail = self.LinkedL.Tail
+        tail = self.LinkedL.returnTail()
         test3 = tail
         test2 = test3.returnPrev()
         test1 = test2.returnPrev()

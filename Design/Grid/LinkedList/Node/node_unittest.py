@@ -3,7 +3,7 @@ import unittest
 from node import Node
 
 root_logger = logging.getLogger()
-root_logger.disabled = False
+root_logger.disabled = True
 
 
 class TestNode(unittest.TestCase):
