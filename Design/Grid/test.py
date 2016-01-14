@@ -1,3 +1,6 @@
-from grid import Grid
+from grid_mn import Grid
 
-x = Grid()
+x = Grid(5,2)
+x.returnGrid()
+x.returnX()
+x.returnY()
