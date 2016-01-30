@@ -1,5 +1,5 @@
 # linkedlist.py, Class: LinkedList
-Aiming for bi-directional Liunked List. 
+Aiming for bi-directional Linked List. 
 
 Will be implemented as a Tictactoe grid in future.
 
