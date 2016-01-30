@@ -14,7 +14,7 @@ from linkedlist import LinkedList
 from node import Node
 
 root_logger = logging.getLogger()
-root_logger.disabled = True
+root_logger.disabled = False
 
 class TestLinkedList(unittest.TestCase):
 

@@ -21,7 +21,7 @@ logging.basicConfig(
     level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 
 root_logger = logging.getLogger()
-root_logger.disabled = True
+root_logger.disabled = False
 
 # Class Grid Start
 class Grid(object):
@@ -79,6 +79,7 @@ class Grid(object):
         i = 1
         for alph in alph_list:
             logging.debug('Grid::initializeGrid::Putting Alphabet %d time', i)
+            logging.debug('Grid::initializeGrid::Alphabaet: alph')
             node = Node(alph, 0)
             self.returnY()[i].pushS(node)
             self.returnX()[0].pushS(node)
