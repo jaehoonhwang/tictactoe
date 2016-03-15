@@ -17,6 +17,7 @@ sys.path.insert(1, dir)
 from linkedlist import LinkedList
 from node import Node
 
+# TODO: I need to fix this code
 
 logging.basicConfig(
     level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -78,6 +79,8 @@ class Grid(object):
             self.returnG()[i].pushS(node)
             i = i + 1
 
+        # FIXME: Compiling Errors
+
         logging.debug('Grid::initializeGrid::Axis X Label Finished')
 
         logging.debug('Grid::initializeGrid::Initialize Axis Y Label')
@@ -110,7 +113,7 @@ class Grid(object):
             string_holder = string_holder + \
                 self.returnG()[i].searchIndex(row).returnName() + space
             logging.debug('Grid::printRow::string_holder: %s', string_holder)
-        print(string_holder)s
+        print(string_holder)
 
     def printCol(self, col=None):
         if col is None:
