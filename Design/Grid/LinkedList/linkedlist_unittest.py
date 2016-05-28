@@ -122,7 +122,7 @@ class TestLinkedList(unittest.TestCase):
         self.assertEqual(val2, self.test2)
 
         val3 = self.LinkedL.searchValue(789)
-        self.assertEqual(val3, self.test3) 
+        self.assertEqual(val3, self.test3)
 
         val4 = self.LinkedL.searchValue(0)
         self.assertEqual(val4, None)
