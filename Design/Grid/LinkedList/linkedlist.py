@@ -120,7 +120,7 @@ class LinkedList(object):
             self._Tail.clear()
             self._Head = None
             self._Tail = None
-            self._Size = self._Size -1 
+            self._Size = self._Size -1
             logging.debug('LinkedList::PopStack::Finished')
         else:
             logging.debug(('LinkedList::PopStack::Tail: ', self._Tail))
@@ -131,7 +131,7 @@ class LinkedList(object):
             self._Size = self._Size -1
             logging.debug('LinkedList::PopStack::Finished')
 
-    # Search Custom Function   
+    # Search Custom Function
 
     ## Search by Index
     def searchIndex(self, index):
