@@ -23,8 +23,7 @@ logging.basicConfig(
 root_logger = logging.getLogger()
 root_logger.disabled = False
 
-# FIXME: Hey m8 you need to fix the label, it swithced. It's suppose to be
-# FIXME: Rows as numbers and columns as alphabets.
+# TODO: Proper Logging needed
 
 # Class Grid Start
 
@@ -39,7 +38,6 @@ class Grid(object):
         self._M = m     # Row
         self._N = n     # Column
         self._G = []    # Grid
-        self._GwN = []
         self.initializeGrid()
         logging.debug('Grid::Constructor Finished')
 
@@ -75,7 +73,7 @@ class Grid(object):
         for alph in alph_list:
             logging.debug('Grid::initializeGrid::Putting Alphabet %d time', i)
             logging.debug('Grid::initializeGrid::Alphabet: alph')
-            node = Node(alph, 0)
+            node = Node(alph)
             logging.debug('Grid::initializeGrid::Axis Label X: %c', alph)
             self.returnG()[i].pushS(node)
             i = i + 1
@@ -102,8 +100,73 @@ class Grid(object):
 
         logging.debug('Grid::initializeGrid Finished')
 
-    def searchPt(self, target):
+    def searchPt(self, xcoor, ycoor):
+        logging.debug('Grid::searchPt: (%d,%d)', xcoor, ycoor)
+        if xcoor > self.returnN():
+            logging.debug('Grid::searchPt: X range exceeds')
+            return
+        if ycoor > self.returnM():
+            logging.debug('Grid::searchPt: Y range exceeds')
+            return
 
+        logging.debug('Grid::searchPt: %s',
+                      self.returnG()[xcoor].searchIndex(ycoor))
+        return self.returnG()[xcoor].searchIndex(ycoor)
+
+    def searchTup(self, tup):
+        xcoor = tup[0]
+        ycoor = tup[1]
+        logging.debug('Grid::searchTup: (%d,%d)', xcoor, ycoor)
+        if xcoor > self.returnN():
+            logging.debug('Grid::searchTup: X range exceeds')
+            return
+        if ycoor > self.returnM():
+            logging.debug('Grid::searchTup: Y range exceeds')
+            return
+
+        logging.debug('Grid::searchTup: %s',
+                      self.returnG()[xcoor].searchIndex(ycoor))
+
+        return self.returnG()[xcoor].searchIndex(ycoor)
+
+    def changeValTar(self, xcoor, ycoor, value):
+        # Changing Target Node Value using X-coordinate and Y-Coordinate
+        self.searchPt(xcoor, ycoor).setValue(value)
+
+    def returnColVal(self, col=None):
+        # Returning (col)th column values in array
+        if col is None:
+            col = 0
+        holder = []
+
+        for i in range(1, self.returnN() + 1):
+            holder.append(self.returnG()[i].searchIndex(col).returnValue())
+
+        return holder
+
+    def returnRowVal(self, row=None):
+        # Returning (row)th row values in array
+        if row is None:
+            row = 0
+        holder = []
+
+        for i in range(1, self.returnM() + 1):
+            holder.append(self.returnG()[row].searchIndex(i).returnValue())
+
+        return holder
+
+    # FIXME: Index Error
+    def returnGrid(self):
+        # Returnig Grid in m by n array
+        holder = [[0 for x in range(self.returnN() )]
+                  for y in range(self.returnM() )]
+
+        print(holder)
+        for i in range(0, self.returnN() - 1):
+            for j in range(0, self.returnM() - 1):
+                holder[i][j] = self.returnG()[j + 1].searchIndex(i + 1).returnValue()
+
+        return holder
 
     def printCol(self, col=None):
         if col is None:

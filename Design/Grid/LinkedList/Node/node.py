@@ -40,6 +40,9 @@ class Node(object):
         logging.debug(('Node::Return::Next: ', self._Next))
         return self._Next
 
+    def __getitem__(self):
+        return self._Value
+
     # Set Variables
 
     def setName(self, n):
