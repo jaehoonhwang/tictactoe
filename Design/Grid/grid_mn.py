@@ -36,9 +36,9 @@ class Grid(object):
         if (m is None or n is None):
             m = 3
             n = 3
-        self._M = m
-        self._N = n
-        self._G = []
+        self._M = m     # Row
+        self._N = n     # Column
+        self._G = []    # Grid
         self._GwN = []
         self.initializeGrid()
         logging.debug('Grid::Constructor Finished')
@@ -66,7 +66,7 @@ class Grid(object):
         for x in range(0, self.returnN() + 1):
             self.returnG().append(LinkedList())
 
-        G0 = Node('Alph/#')
+        G0 = Node('Alph/#')     # First Node of a grid. Index
 
         self.returnG()[0].pushS(G0)
 
@@ -92,9 +92,9 @@ class Grid(object):
 
         for y in range(1, self.returnN() + 1):
             for x in range(1, self.returnM() + 1):
-                logging.debug('Grid::initializeGrid::Setting up XY Axis: %s%s' %
-                    (self.returnG()[y].returnHead().returnName(),
-                     self.returnG()[0].searchIndex(x).returnName()))
+                logging.debug('Grid::initializeGrid::Setting up Axis: %s%s' %
+                              (self.returnG()[y].returnHead().returnName(),
+                               self.returnG()[0].searchIndex(x).returnName()))
 
                 node = Node(self.returnG()[y].returnHead().returnName(
                 ) + self.returnG()[0].searchIndex(x).returnName(), 0)
@@ -102,7 +102,29 @@ class Grid(object):
 
         logging.debug('Grid::initializeGrid Finished')
 
-    def printCol(self, row=None):
+    def searchPt(self, target):
+
+
+    def printCol(self, col=None):
+        if col is None:
+            col = 0
+        logging.debug('Grid::printRow Initialized')
+        string_holder = ''
+        space = '\t - \t'
+        for i in range(0, self.returnN() + 1):
+            if i == self.returnN():
+                string_holder = string_holder + \
+                    self.returnG()[i].searchIndex(col).returnName()
+                logging.debug('Grid::printCol::Last string_holder: %s',
+                              string_holder)
+            else:
+                string_holder = string_holder + \
+                    self.returnG()[i].searchIndex(col).returnName() + space
+                logging.debug('Grid::printCol::string_holder: %s',
+                              string_holder)
+        print(string_holder)
+
+    def printRow(self, row=None):
         if row is None:
             row = 0
         logging.debug('Grid::printRow Initialized')
@@ -111,33 +133,14 @@ class Grid(object):
         for i in range(0, self.returnM() + 1):
             if i == self.returnM():
                 string_holder = string_holder + \
-                    self.returnG()[i].searchIndex(row).returnName()
+                    self.returnG()[row].searchIndex(i).returnName()
                 logging.debug('Grid::printRow::Last string_holder: %s',
                               string_holder)
             else:
                 string_holder = string_holder + \
-                    self.returnG()[i].searchIndex(row).returnName() + space
-                logging.debug('Grid::printRow::string_holder: %s',
-                              string_holder)
-        print(string_holder)
-
-    def printRow(self, col=None):
-        if col is None:
-            col = 0
-        logging.debug('Grid::printCol Initialized')
-        string_holder = ''
-        space = '\t - \t'
-        for i in range(0, self.returnN() + 1):
-            if i == self.returnN():
-                string_holder = string_holder + \
-                    self.returnG()[col].searchIndex(i).returnName()
-                logging.debug('Grid::printCol::Last string_holder: %s',
-                              string_holder)
-            else:
-                string_holder = string_holder + \
-                    self.returnG()[col].searchIndex(i).returnName() + space
+                    self.returnG()[row].searchIndex(i).returnName() + space
                 logging.debug(
-                    'Grid::printCol::string_holder: %s', string_holder)
+                    'Grid::printRow::string_holder: %s', string_holder)
         print(string_holder)
 
     def printRowAll(self):
