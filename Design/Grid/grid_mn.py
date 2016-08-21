@@ -101,17 +101,19 @@ class Grid(object):
         logging.debug('Grid::initializeGrid Finished')
 
     def searchPt(self, xcoor, ycoor):
+        logging.debug('Grid::searchPt Initialized')
         logging.debug('Grid::searchPt: (%d,%d)', xcoor, ycoor)
-        if xcoor > self.returnN():
+        if xcoor > self.returnM():
             logging.debug('Grid::searchPt: X range exceeds')
             return
-        if ycoor > self.returnM():
+        if ycoor > self.returnN():
             logging.debug('Grid::searchPt: Y range exceeds')
             return
 
         logging.debug('Grid::searchPt: %s',
-                      self.returnG()[xcoor].searchIndex(ycoor))
-        return self.returnG()[xcoor].searchIndex(ycoor)
+                      self.returnG()[ycoor].searchIndex(xcoor))
+        logging.debug('Grid::searchPt Finished')
+        return self.returnG()[ycoor].searchIndex(xcoor)
 
     def searchTup(self, tup):
         xcoor = tup[0]
@@ -129,9 +131,24 @@ class Grid(object):
 
         return self.returnG()[xcoor].searchIndex(ycoor)
 
-    def changeValTar(self, xcoor, ycoor, value):
+    def searchName(self, name):
+        firsthalf, secondhalf = name[:len(string) / 2], name[len(string) / 2:]
+        xcoor = ord(firsthalf) - 64
+        ycoor = int(secondhalf)
+
+        return self.searchPt(xcoor, ycoor)
+
+    def changeValCoor(self, xcoor, ycoor, value):
         # Changing Target Node Value using X-coordinate and Y-Coordinate
         self.searchPt(xcoor, ycoor).setValue(value)
+
+    def changeValTup(self, tups, value):
+        # Changing Target Node Value using tuples.
+        self.searchTup(xcoor, ycoor).setValue(value)
+
+    def changeValName(self, name, vaule):
+        # Changing Target Node Value using its name
+        self.searchName(name).setValue(value)
 
     def returnColVal(self, col=None):
         # Returning (col)th column values in array
@@ -155,17 +172,17 @@ class Grid(object):
 
         return holder
 
-    # FIXME: Index Error
     def returnGrid(self):
         # Returnig Grid in m by n array
-        holder = [[0 for x in range(self.returnN() )]
-                  for y in range(self.returnM() )]
+        logging.debug('Grid::returnGrid Initialized')
+        holder = [[0 for x in range(self.returnN())]
+                  for y in range(self.returnM())]
 
-        print(holder)
-        for i in range(0, self.returnN() - 1):
-            for j in range(0, self.returnM() - 1):
-                holder[i][j] = self.returnG()[j + 1].searchIndex(i + 1).returnValue()
-
+        for i in range(0, self.returnM()):
+            for j in range(0, self.returnN()):
+                holder[i][j] = self.returnG()[j + 1].searchIndex(
+                                                i + 1).returnValue()
+        logging.debug('Grid::returnGrid Ended')
         return holder
 
     def printCol(self, col=None):
