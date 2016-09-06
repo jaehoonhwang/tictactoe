@@ -1,10 +1,10 @@
-# Importing official modules
+# Importing Standard Libraries
 import os
 import sys
 import logging
 import string
 
-# Directories of Node
+# Directories of Node and LinkedList
 dir = os.path.dirname(__file__)
 dir = dir + '/LinkedList'
 sys.path.insert(1, dir)
@@ -16,6 +16,7 @@ sys.path.insert(1, dir)
 # Importing custom modules
 from linkedlist import LinkedList
 from node import Node
+
 
 logging.basicConfig(
     level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -172,7 +173,7 @@ class Grid(object):
 
         return holder
 
-    def returnGrid(self):
+    def returnGridArr(self):
         # Returnig Grid in m by n array
         logging.debug('Grid::returnGrid Initialized')
         holder = [[0 for x in range(self.returnN())]
@@ -181,7 +182,7 @@ class Grid(object):
         for i in range(0, self.returnM()):
             for j in range(0, self.returnN()):
                 holder[i][j] = self.returnG()[j + 1].searchIndex(
-                                                i + 1).returnValue()
+                    i + 1).returnValue()
         logging.debug('Grid::returnGrid Ended')
         return holder
 
