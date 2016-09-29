@@ -1,9 +1,13 @@
+#!/usr/bin/env python3
+
 # Importing official modules
 import os
 import sys
 import logging
 
-# # Setting Relative Path to Linked List Module
+# from Node.node import Node
+# Setting Relative Path to Linked List Module
+
 dir = os.path.dirname(__file__)
 dir = dir + '/Node'
 sys.path.insert(1, dir)
@@ -12,6 +16,8 @@ from node import Node
 
 logging.basicConfig(
     level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
+logger = logging.getLogger()
+logger.propagate = False
 
 # LinkedList Class
 

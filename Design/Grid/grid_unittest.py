@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 # Importing Standard Libaries
 import os
 import sys
@@ -5,22 +7,25 @@ import logging
 import string
 import unittest
 
+# from Linkedlist.linkedlist import LinkedList
+# from Linkedlist.Node.node import Node
+
 # Directories of Node and LinkedList
 dir = os.path.dirname(__file__)
-dir = dir + '/LinkedList'
+dir = dir + '/Linkedlist'
 sys.path.insert(1, dir)
 
 dir = os.path.dirname(__file__)
-dir = dir + '/LinkedList/Node'
+dir = dir + '/Linkedlist/Node'
 sys.path.insert(1, dir)
 
 # Importing custom modules
-from linkedlist import LinkedList
 from node import Node
+from linkedlist import LinkedList
 from grid_mn import Grid
 
 root_logger = logging.getLogger()
-root_logger.disabled = False
+root_logger.disabled = True
 
 
 class TestGrid(unittest.TestCase):
@@ -28,7 +33,7 @@ class TestGrid(unittest.TestCase):
     def setUp(self):
         self.m = 3
         self.n = 3
-        self.Grid = Grid(m, n)
+        self.Grid = Grid(self.m, self.n)
         i = 0
         for x in range(1, 4):
             for y in range(1, 4):
@@ -57,9 +62,14 @@ class TestGrid(unittest.TestCase):
 
     def testSearch(self):
         # Checking function, Grid::searchPt
-        for x in range(1,4):
-            for y in range(1,4):
-                self.assertEqual(self.Grid.searchPt(x,y), )
+        for x in range(1, 4):
+            for y in range(1, 4):
+                self.assertEqual(self.Grid.searchPt(
+                    x, y), (x - 1) * 3 + (y - 1))
         # self.assertEqual(self.Grid.searchPt(1,1), 0)
-        # self.assertEqual(self.Grid.searchPt(1,2), 1)
-        # self.assertEqual(self.Grid.searchPt(1,3), 2)
+        self.assertEqual(self.Grid.searchPt(1, 2), 1)
+        self.assertEqual(self.Grid.searchPt(1, 3), 2)
+
+if __name__ == '__main__':
+    print(sys.version_info)
+    unittest.main(verbosity=2)

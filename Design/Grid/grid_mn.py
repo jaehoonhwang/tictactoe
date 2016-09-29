@@ -1,28 +1,37 @@
+#!/usr/bin/env python3
+
 # Importing Standard Libraries
 import os
 import sys
 import logging
 import string
 
+# Jay, you are not using below call because it is a RELATIVE PATHING
+# You will get an error when calling this from sub sub sub sub sub dir.
+# from Linkedlist.linkedlist import LinkedList
+# from Linkedlist.Node.node import Node
+
 # Directories of Node and LinkedList
 dir = os.path.dirname(__file__)
-dir = dir + '/LinkedList'
+dir = dir + '/Linkedlist'
 sys.path.insert(1, dir)
 
 dir = os.path.dirname(__file__)
-dir = dir + '/LinkedList/Node'
+dir = dir + '/Linkedlist/Node'
 sys.path.insert(1, dir)
 
 # Importing custom modules
-from linkedlist import LinkedList
+
 from node import Node
+from linkedlist import LinkedList
 
 
 logging.basicConfig(
     level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 
-root_logger = logging.getLogger()
-root_logger.disabled = False
+logger = logging.getLogger()
+logger.propagate = False
+logger.disabled = False
 
 # TODO: Proper Logging needed
 
