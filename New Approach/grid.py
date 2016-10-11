@@ -1,5 +1,3 @@
-#/usr/local/bin/ python3
-
 import logging
 import string
 
@@ -12,7 +10,7 @@ logger.disabled = False
 
 
 class Grid(object):
-
+    # Constructors
     def __init__(self, m=3, n=3):
         logging.debug("Grid::Constructor Initialized")
         self._M = m + 1
@@ -36,12 +34,37 @@ class Grid(object):
         alph_list = list(string.ascii_uppercase)[:self.returnX() - 1]
 
         logging.debug("Grid::initializeGrid:: Generating X and Y axis Label")
-        for x in xrange(1, self.returnX()):
+        for x in range(1, self.returnX()):
             self.returnG()[0][x] = alph_list[x - 1]
 
-        for y in xrange(1, self.returnY()):
+        for y in range(1, self.returnY()):
             self.returnG()[y][0] = y
 
+        logging.debug("Grid:initializedGrid End")
+
+    # Search Functions
+
+    def searchCoor(self, x=None, y=None):
+        logging.debug("Grid::searchCoor: {0}, {1}".format(x, y))
+        if x < 0 or y < 0:
+            logging.warning("Grid::searchCoor: Inputs are less than 0, x = {0} & y = {1}". format(x, y))
+            return -1
+        if x > self.returnX() or y > self.returnY():
+            logging.warning("Grid::searchCoor: Inputs are bigger than its size")
+            return -1
+        if x is None or y is None:
+            logging.warning("Grid::searchCoor: Need input for the function")
+            return -1
+
+        logging.debug("Grid::searchCoor::returnValue: {0}".format(self.returnG()[y][x]))
+        return self.returnG()[y][x]
+
+    def searchName(self, target_str):
+
+
+    # Helper Functions
+
+    ## Return Attributes
     def returnM(self):
         return self._M
 
@@ -57,14 +80,16 @@ class Grid(object):
     def returnG(self):
         return self._G
 
+    ## Print Attributes
     def printG(self):
         for x in self.returnG():
-            print x
+            print(x)
 
 
 def main():
     a = Grid()
     a.printG()
+    print(a.searchCoor(-1, -2))
 
 
 if __name__ == '__main__':
