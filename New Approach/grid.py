@@ -42,6 +42,11 @@ class Grid(object):
             self.returnG()[y][0] = str(y)
 
         logging.debug("Grid:initializedGrid End")
+    # Custom Setting Functions
+
+    # Change with Coordinate
+    def changeCoor(self, x=None, y=None):
+        logging.debug("Grid::changeCoor")
 
     # Search Functions
 
@@ -69,7 +74,7 @@ class Grid(object):
         if target_str is None or type(target_str) is not str:
             logging.warning("Grid::searchName: Input required")
             return -1
-        if type(target_str) is str and type(nums) is None:
+        if type(target_str) is str and nums is None:
             if len(target_str) != 2:
                 logging.warning("Grid::searchName: str length not permiitted")
                 return -1
