@@ -1,3 +1,5 @@
+#/usr/local/bin/python3
+
 import logging
 import string
 
@@ -71,6 +73,8 @@ class Grid(object):
 
     def searchName(self, target_str=None, nums=None):
         logging.debug("Grid::searchName: Initialized")
+        logging.info("Grid::searchName: target_str type = {0} num type = {1}".
+                     format(type(target_str), type(nums)))
         if target_str is None or type(target_str) is not str:
             logging.warning("Grid::searchName: Input required")
             return -1
@@ -92,9 +96,36 @@ class Grid(object):
                 return -1
             firstStr = ord(target_str) - 64
             return self.returnG()[nums][firstStr]
+        logging.warning("Grid::searchName: Unknown Error")
         return -1
 
     # Helper Functions
+
+    # Filter Functions
+    def evalGrid(self, x=None, y=None):
+        if self.returnX() < x:
+            logging.warning("Grid::evalGrid: Input x is greater than Grid's X")
+            return -1
+        if self.returnY() < y:
+            logging.warning("Grid::evalGrid: Input y is greater than Grid's Y")
+            return -1
+        if x < 0 or y < 0:
+            logging.warning("Grid::evalGrid: Input x or/and y is/are less \
+                            than 0")
+            return -1
+        return self.returnG()[y][x]
+
+    def typeCheck(self, target, target_type):
+        if target is None:
+            logging.info("Grid::typeCheck: Target is None Type")
+            return True
+        if target is target_type:
+            logging.info("Grid::typeCheck: Target is {0}".format(target_type))
+            return True
+        else:
+            logging.info("Grid::typeCheck: Target is not {0}".format(
+                target_type))
+            return False
 
     # Return Attributes
     def returnM(self):
