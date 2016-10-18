@@ -3,18 +3,28 @@
 def main():
     a = [0 for x in range(0,5)]
     try:
-        a[5] = 3
+        a[6] = 3
     except IndexError:
         print ("Hello")
 
-    try:
-        a[3] = 3
-    except IndexError:
-        print ("Error")
-    finally:
-        a[3] = 4
+    a = None
 
-    print (a[3])
+    print(typeCheck(a, None))
+
+
+
+def evalGrid(grid, x):
+    try:
+        grid[x] == 0
+    except IndexError:
+        return False
+    return True
+
+def typeCheck(target, target_type):
+    if isinstance(target, target_type):
+        return True
+    else:
+        return False
 
 if __name__ == "__main__":
     main()

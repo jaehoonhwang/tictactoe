@@ -47,38 +47,47 @@ class Grid(object):
     # Custom Setting Functions
 
     # Change with Coordinate
-    def changeCoor(self, x=None, y=None):
-        logging.debug("Grid::changeCoor")
+    def changeCoor(self, x=None, y=None, target=None):
+        logging.debug("Grid::changeCoor: Initialized")
+        if self.evalGrid(x, y) and self.typeCheck(target, int):
+            logging.info("Grid::changeCoor: Target has been verified")
+            self.returnG[y][x] = target
+            return True
+        else:
+            logging.warning("Grid::changeCoor has failed")
+            logging.warning("Grid::changeCoor: Check type/value of x, y, \
+                            target")
+            return False
+
+    def changeName(self, target_str=None, nums=None, target=None):
+        logging.debug("Grid::changeName: Initialized")
+        foo = self.searchName(target_str, nums)
+        if foo is not -1:
+            foo = target
+            return True
+        else:
+            return False
 
     # Search Functions
 
     def searchCoor(self, x=None, y=None):
+        logging.debug("Grid::searchCoor: Initialized")
         logging.debug("Grid::searchCoor: {0}, {1}".format(x, y))
-        if x < 0 or y < 0:
-            logging.warning(
-                "Grid::searchCoor: Inputs are less than 0, x = {0} & y = {1}".
-                format(x, y))
+        if self.evalGrid(x, y):
+            logging.info("Grid::searchCoor: Successful.")
+            return self.returnG()[y][x]
+        else:
+            logging.warning("Grid::searchCoor: Failed")
             return -1
-        if x > self.returnX() or y > self.returnY():
-            logging.warning(
-                "Grid::searchCoor: Inputs are bigger than its size")
-            return -1
-        if x is None or y is None:
-            logging.warning("Grid::searchCoor: Need input for the function")
-            return -1
-
-        logging.debug("Grid::searchCoor::returnValue: {0}".format(
-            self.returnG()[y][x]))
-        return self.returnG()[y][x]
 
     def searchName(self, target_str=None, nums=None):
         logging.debug("Grid::searchName: Initialized")
         logging.info("Grid::searchName: target_str type = {0} num type = {1}".
                      format(type(target_str), type(nums)))
-        if target_str is None or type(target_str) is not str:
-            logging.warning("Grid::searchName: Input required")
+        if target_str is None or self.typeCheck(target_str, str):
+            logging.warning("Grid::searchName: Correct Input required")
             return -1
-        if type(target_str) is str and nums is None:
+        if self.typeCheck(target_str, str) and nums is None:
             if len(target_str) != 2:
                 logging.warning("Grid::searchName: str length not permiitted")
                 return -1
@@ -90,7 +99,7 @@ class Grid(object):
             logging.debug("Grid::searchName: {0} and {1}".format(firstpt,
                                                                  secondpt))
             return self.returnG()[secondpt][firstpt]
-        if type(target_str) is str and type(nums) is int:
+        if self.typeCheck(target_str, str) and self.typeCheck(nums, int):
             if len(target_str) != 1:
                 logging.warning("Grid::searchName: str length not permiited")
                 return -1
@@ -103,28 +112,36 @@ class Grid(object):
 
     # Filter Functions
     def evalGrid(self, x=None, y=None):
-        if self.returnX() < x:
-            logging.warning("Grid::evalGrid: Input x is greater than Grid's X")
-            return -1
-        if self.returnY() < y:
-            logging.warning("Grid::evalGrid: Input y is greater than Grid's Y")
-            return -1
+        if not(self.typeCheck(x, int) and self.typeCheck(y, int)):
+            return False
+        try:
+            self.returnG()[y][x] == 0
+        except IndexError:
+            logging.warning("Grid::evalGrid::IndexError: Input x or/and y \
+                            is/are greater than Grid's X")
+            return False
         if x < 0 or y < 0:
-            logging.warning("Grid::evalGrid: Input x or/and y is/are less \
-                            than 0")
-            return -1
-        return self.returnG()[y][x]
+            logging.warning("Grid::evalGrid: Input x or y is negative value.")
+            return False
+        logging.info("Grid::evalGrid: Correct Input")
+
+        return True
 
     def typeCheck(self, target, target_type):
-        if target is None:
-            logging.info("Grid::typeCheck: Target is None Type")
-            return True
-        if target is target_type:
-            logging.info("Grid::typeCheck: Target is {0}".format(target_type))
+
+        try:
+            isinstance(target, target_type)
+        except TypeError:
+            logging.warning("Grid::typeCheck: TypeError. Maybe you are trying \
+                            to check None Type?")
+            return False
+        if isinstance(target, target_type):
+            logging.info("Grid::typeCheck: Correct type, {0}.".
+                         format(target_type))
             return True
         else:
-            logging.info("Grid::typeCheck: Target is not {0}".format(
-                target_type))
+            logging.warning("Grid::typeCheck: Wrong type, {0}.".
+                            format(target_type))
             return False
 
     # Return Attributes
@@ -153,7 +170,8 @@ def main():
     a = Grid()
     a.printG()
     print(a.searchName("A1"))
-
+    print(a.changeName("A1",None ,2))
+    a.printG()
 
 if __name__ == '__main__':
     main()
