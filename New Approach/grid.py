@@ -1,4 +1,4 @@
-#/usr/local/bin/python3
+# /usr/local/bin/python3
 
 import logging
 import string
@@ -44,53 +44,61 @@ class Grid(object):
             self.returnG()[y][0] = str(y)
 
         logging.debug("Grid:initializedGrid End")
+
     # Custom Setting Functions
 
     # Change with Coordinate
     def changeCoor(self, x=None, y=None, target=None):
         logging.debug("Grid::changeCoor: Initialized")
-        if self.evalGrid(x, y) and self.typeCheck(target, int):
-            logging.info("Grid::changeCoor: Target has been verified")
-            self.returnG[y][x] = target
-            return True
-        else:
-            logging.warning("Grid::changeCoor has failed")
-            logging.warning("Grid::changeCoor: Check type/value of x, y, \
-                            target")
-            return False
+        x, y = self.Coor2Ind(x,y)
+        self.returnG()[y][x] = target
+        logging.debug("Grid::changeCoor: Finished")
 
-    def changeName(self, target_str=None, nums=None, target=None):
+    def changeName(self, target_str=None, target=None):
         logging.debug("Grid::changeName: Initialized")
-        foo = self.searchName(target_str, nums)
-        if foo is not -1:
-            foo = target
-            return True
-        else:
-            return False
+        x, y = self.Name2Ind(target_str)
+        self.returnG()[y][x] = target
+        logging.debug("Grid::changeName: Finished")
+
 
     # Search Functions
 
     def searchCoor(self, x=None, y=None):
         logging.debug("Grid::searchCoor: Initialized")
         logging.debug("Grid::searchCoor: {0}, {1}".format(x, y))
-        if self.evalGrid(x, y):
-            logging.info("Grid::searchCoor: Successful.")
-            return self.returnG()[y][x]
-        else:
-            logging.warning("Grid::searchCoor: Failed")
-            return -1
+        x, y = self.Coor2Ind(x, y)
+        return self.returnG()[y][x]
 
-    def searchName(self, target_str=None, nums=None):
+    def searchName(self, target_str=None):
         logging.debug("Grid::searchName: Initialized")
-        logging.info("Grid::searchName: target_str type = {0} num type = {1}".
-                     format(type(target_str), type(nums)))
-        if target_str is None or self.typeCheck(target_str, str):
-            logging.warning("Grid::searchName: Correct Input required")
-            return -1
-        if self.typeCheck(target_str, str) and nums is None:
+        logging.info("Grid::searchName: target_str type = {0}".
+                     format(type(target_str)))
+        x, y = self.Name2Ind(target_str)
+        return self.returnG()[y][x]
+
+    # Helper Functions
+
+    def Coor2Ind(self, x=None, y=None):
+        logging.debug("Grid::Coor2Ind: Initialized")
+        logging.debug("Grid::Coor2Ind: x = {0}, y = {1}".format(x, y))
+        if self.evalGrid(x, y):
+            logging.info("Grid::Coor2Ind: evalGrid Sucessful")
+            return x,y
+        else:
+            raise IndexError("Grid::Coor2Ind: Index failed.")
+
+    def Name2Ind(self, target_str=None):
+        logging.debug("Grid::Name2Ind: Initialized")
+        logging.info("Grid::Name2Ind: target_str type = {0}".
+                     format(type(target_str)))
+        if target_str is None:
+            logging.warning("Grid::Name2Ind: Type error, param1 is None Type.")
+            raise TypeError("Grid::Name2Ind: TypeError. param1 is None Type.")
+        if self.typeCheck(target_str, str):
             if len(target_str) != 2:
-                logging.warning("Grid::searchName: str length not permiitted")
-                return -1
+                logging.warning("Grid::Name2Ind: Assertion Error, \
+                                 length of target_str = {0} != 2".format(len(target_str)))
+                raise AssertionError("Grid::Name2Ind: Target string length is not 2")
             firstStr = list(target_str)[0]
             secondStr = list(target_str)[1]
 
@@ -98,21 +106,13 @@ class Grid(object):
             secondpt = ord(secondStr) - 48
             logging.debug("Grid::searchName: {0} and {1}".format(firstpt,
                                                                  secondpt))
-            return self.returnG()[secondpt][firstpt]
-        if self.typeCheck(target_str, str) and self.typeCheck(nums, int):
-            if len(target_str) != 1:
-                logging.warning("Grid::searchName: str length not permiited")
-                return -1
-            firstStr = ord(target_str) - 64
-            return self.returnG()[nums][firstStr]
-        logging.warning("Grid::searchName: Unknown Error")
-        return -1
+            return firstpt, secondpt
 
-    # Helper Functions
+
 
     # Filter Functions
     def evalGrid(self, x=None, y=None):
-        if not(self.typeCheck(x, int) and self.typeCheck(y, int)):
+        if not (self.typeCheck(x, int) and self.typeCheck(y, int)):
             return False
         try:
             self.returnG()[y][x] == 0
@@ -128,7 +128,6 @@ class Grid(object):
         return True
 
     def typeCheck(self, target, target_type):
-
         try:
             isinstance(target, target_type)
         except TypeError:
@@ -170,8 +169,9 @@ def main():
     a = Grid()
     a.printG()
     print(a.searchName("A1"))
-    print(a.changeName("A1",None ,2))
+    print(a.changeName("A1", 2))
     a.printG()
+
 
 if __name__ == '__main__':
     main()
