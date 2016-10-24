@@ -13,10 +13,32 @@ logger.disabled = False
 # TODO: Docstring (Sphnix Documentation)
 # TODO: Unittest
 
+
 class Grid(object):
-    # Constructors
+    """Grid class using M by N grid
+
+    Making a grid by using list
+
+    Attributes:
+        M (int): M-row as in M by N, (creates M + 1 due to axis label)
+        N (int): N-column as in M by N (creates N + 1 due to axis label)
+        X (int): X axis, M-row
+        Y (int): Y axis, N-column
+        G (`list` of `list`): Grid
+
+    """
 
     def __init__(self, m=3, n=3):
+        """Grid class __init__ method (Constructor)
+
+        Note:
+            Default Size, if not configured, is a 3 by 3 grid.
+
+        Args:
+            m (int, optional): Specifying M
+            n (int, optional): Specifying N
+
+        """
         logging.debug("Grid::Constructor Initialized")
         self._M = m + 1
         self._N = n + 1
@@ -27,6 +49,23 @@ class Grid(object):
         logging.debug("Grid::Constructor Finished")
 
     def initializeGrid(self):
+        """ Initialize the Grid (Labeling)
+
+        Initialize Grid and set-up the Attributes, x and y.
+        X-axis will be Alphbaetic labeling and Y-axis will be numeric labeling.
+
+        Note:
+            Grid creates M by N, where M doesn't have to equal to N
+            Grid M or N can't exceed 26, due to alphabet restriction
+
+        Examples:
+            >> Grid(3,3):
+            [["Num/Alph", "A", "B", "C"],
+             ["1", 0, 0, 0],
+             ["2", 0, 0, 0],
+             ["3", 0, 0, 0]]
+
+        """
         logging.debug("Grid::initializeGrid:: M: {0}, N: {1}".format(self._M,
                                                                      self._N))
         self._G = [[0 for x in range(self.returnN())]
@@ -52,7 +91,7 @@ class Grid(object):
     # Change with Coordinate
     def changeCoor(self, x=None, y=None, target=None):
         logging.debug("Grid::changeCoor: Initialized")
-        x, y = self.Coor2Ind(x,y)
+        x, y = self.Coor2Ind(x, y)
         self.returnG()[y][x] = target
         logging.debug("Grid::changeCoor: Finished")
 
@@ -61,7 +100,6 @@ class Grid(object):
         x, y = self.Name2Ind(target_str)
         self.returnG()[y][x] = target
         logging.debug("Grid::changeName: Finished")
-
 
     # Search Functions
 
@@ -85,7 +123,7 @@ class Grid(object):
         logging.debug("Grid::Coor2Ind: x = {0}, y = {1}".format(x, y))
         if self.evalGrid(x, y):
             logging.info("Grid::Coor2Ind: evalGrid Sucessful")
-            return x,y
+            return x, y
         else:
             raise IndexError("Grid::Coor2Ind: Index failed.")
 
@@ -98,9 +136,11 @@ class Grid(object):
             raise TypeError("Grid::Name2Ind: TypeError. param1 is None Type.")
         if self.typeCheck(target_str, str):
             if len(target_str) != 2:
-                logging.warning("Grid::Name2Ind: Assertion Error, \
-                                 length of target_str = {0} != 2".format(len(target_str)))
-                raise AssertionError("Grid::Name2Ind: Target string length is not 2")
+                logging.warning("Grid:: Name2Ind: Assertion Error,
+                                length of target_str={0} != 2".
+                                format(len(target_str)))
+                raise AssertionError(
+                    "Grid::Name2Ind: Target string length is not 2")
             firstStr = list(target_str)[0]
             secondStr = list(target_str)[1]
 
@@ -109,8 +149,6 @@ class Grid(object):
             logging.debug("Grid::searchName: {0} and {1}".format(firstpt,
                                                                  secondpt))
             return firstpt, secondpt
-
-
 
     # Filter Functions
     def evalGrid(self, x=None, y=None):
