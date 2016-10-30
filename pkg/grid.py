@@ -10,7 +10,6 @@ logger = logging.getLogger()
 logger.propagate = False
 logger.disabled = False
 
-# TODO: Docstring (Sphnix Documentation)
 # TODO: Unittest
 
 
@@ -355,13 +354,17 @@ class Grid(object):
 
     def returnCol(self, col):
         """Return n column"""
-        return self.returnG()[1:][col]
+        ls = []
+        for x in range(1, self.returnN()):
+            ls.append(self.returnG()[x][col])
+        return ls
 
     # Print Attributes
     def printG(self):
         """Print the grid"""
         for item in self.returnG():
-            print(str(item[0]) + "\t - \t", '\t - \t'.join(map(str, item[1:])))
+            print (str(item[0]) + "\t - \t", "\t - \t".join(map(str,
+                                                                item[1:])))
 
 
 def main():
@@ -370,7 +373,11 @@ def main():
     print(a.searchName("A1"))
     print(a.changeName("A1", 2))
     a.printG()
+    print("RETURN ROW")
     print(a.returnRow(0))
+    print("RETURN COL")
+    print(a.returnCol(0))
+    print(a.returnG())
 
 
 if __name__ == '__main__':
