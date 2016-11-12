@@ -355,7 +355,7 @@ class Grid(object):
     def returnCol(self, col):
         """Return n column"""
         ls = []
-        for x in range(1, self.returnN()):
+        for x in range(1, self.returnM()):
             ls.append(self.returnG()[x][col])
         return ls
 
