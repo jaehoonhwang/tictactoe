@@ -83,7 +83,7 @@ class Grid(object):
         for y in range(1, self.returnY()):
             self.returnG()[y][0] = str(y)
 
-        logging.debug("Grid:initializedGrid End")
+        logging.debug("Grid::initializedGrid End")
 
     # Custom Setting Functions
 
@@ -93,6 +93,9 @@ class Grid(object):
 
         Change Grid value at Coordinate (x,y). It uses `Coor2Ind` function to
         locate target value to be changed.
+
+        Note:
+            It is x,y in Cartesian Coordinates. So, it is G[y][x] in 2d list
 
         Example:
             Before
@@ -182,6 +185,9 @@ class Grid(object):
         the grid at the target location. THe function uses `Name2Ind` to locate
         Name.
 
+        Note:
+            Alph presents X axis and Number presents Y Axis
+
         Example:
         G = [['Alph/Num', A, B, C],
              [1, 0, 1, 2],
@@ -249,8 +255,8 @@ class Grid(object):
                 logging.warning("Grid:: Name2Ind: Assertion Error, \
                                 length of target_str={0} != 2".
                                 format(len(target_str)))
-                raise AssertionError(
-                    "Grid::Name2Ind: Target string length is not 2")
+                raise AssertionError("Grid::Name2Ind: Target string length is \
+                                      not 2")
             firstStr = list(target_str)[0]
             secondStr = list(target_str)[1]
 
@@ -286,8 +292,8 @@ class Grid(object):
         self.typeCheck(y, int)
         try:
             self.returnG()[y][x] == 0
-        except IndexError("Grid::evalGrid: x or y is out of range"):
-            logging.warning("Grid::evalGrid::IndexError: Input x or/and y \
+        except IndexError:
+            raise IndexError("Grid::evalGrid::IndexError: Input x or/and y \
                             is/are greater than Grid's X")
         if x < 0 or y < 0:
             logging.warning("Grid::evalGrid: Input x or y is negative value.")
