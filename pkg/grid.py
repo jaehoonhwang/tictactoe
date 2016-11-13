@@ -10,8 +10,6 @@ logger = logging.getLogger()
 logger.propagate = False
 logger.disabled = False
 
-# TODO: Unittest
-
 
 class Grid(object):
     """Grid class using M by N grid
