@@ -2,6 +2,8 @@ import logging
 import unittest
 from grid import Grid
 
+# TODO: Create AssertRaise cases
+
 
 class GridUnittest(unittest.TestCase):
     """ Grid Unit Test
