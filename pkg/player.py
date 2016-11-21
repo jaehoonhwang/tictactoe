@@ -1,7 +1,6 @@
 # /usr/local/bin/python3
 
 import logging
-import string
 
 logging.basicConfig(
     level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -12,16 +11,18 @@ logger.disabled = False
 
 # TODO: Sanity Check for the inputs, One method to rule them all
 
+
 class Player(object):
     """Player class
 
     Attributes:
         Name (str): Name of the user
         Turn (bool): Turn of the player
+        Mark (str): Mark of the player
 
     """
 
-    def __init__(self, name=None, turn = False):
+    def __init__(self, name=None, turn=False, mark='O'):
         """Player Class __init__ method
 
         Args:
@@ -32,7 +33,7 @@ class Player(object):
 
         self._Name = name
         self._Turn = False
-
+        self._Mark = mark
 
     def setName(self, name=None):
         """Set Name for the player
@@ -73,6 +74,23 @@ class Player(object):
             else:
                 raise TypeError("Player::setTurn: Input is not Bool Type")
 
+    def setMark(self, mark=None):
+        """Set Mark for the player
+
+        Args:
+            mark (str): Mark of the player, default 'O' or 'X'
+
+        Raise:
+            TypeError: Input is None
+            TypeError: Input is not str Type
+        """
+        if mark is not None:
+            if isinstance(mark, str):
+                self._Mark = mark
+            else:
+                raise TypeError("Player::setMark: Input is not str Type")
+        else:
+            raise TypeError("Player::setMark: Input is None Type")
 
     def returnName(self):
         """Return Name"""
@@ -81,6 +99,10 @@ class Player(object):
     def returnTurn(self):
         """Return Turn"""
         return self._Turn
+
+    def returnMark(self):
+        """Return Mark"""
+        return self._Mark
 
     def __str__(self):
         """Class's String is Name of the player"""
