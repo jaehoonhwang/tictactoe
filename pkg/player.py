@@ -9,7 +9,7 @@ logger = logging.getLogger()
 logger.propagate = False
 logger.disabled = False
 
-# TODO: Sanity Check for the inputs, One method to rule them all
+# TODO: Sanity Check for the inputs, One method to rule them all also logging
 
 
 class Player(object):
