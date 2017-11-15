@@ -1,7 +1,9 @@
 # Tic Tac Toe
 
-Changes coming soon.
+Working version in tictactoe/
+
+Sinec it's all in one file, now seperating into different classes
 
 ## Version
-* Python 3: 3.4.3
-* Qt: PyQt5
+* Python 2.7.1
+* Probably gonna use Tkinter.
