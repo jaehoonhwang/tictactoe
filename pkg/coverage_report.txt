@@ -1,0 +1,3 @@
+Coverage Command Line:
+coverage run -m unittest tests/~
+then run coverage report -m
